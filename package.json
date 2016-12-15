@@ -1,6 +1,6 @@
 {
   "name": "securenet-rest-sdk",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A modern JavaScript client for the SecureNet REST API.",
   "main": "lib/index.js",
   "repository": {
