@@ -1,3 +1,4 @@
+import 'babel-polyfill';
 import * as vault from './api/vault';
 
 // TODO: Make this better...
