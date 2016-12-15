@@ -1,0 +1,9 @@
+{
+  "name": "securenet-rest-sdk",
+  "version": "1.0.0",
+  "description": "A modern JavaScript client for the SecureNet REST API.",
+  "main": "index.js",
+  "repository": "https://github.com/maxschmeling/securenet-rest-sdk",
+  "author": "Max Schmeling <schmeling88@gmail.com>",
+  "license": "MIT"
+}
