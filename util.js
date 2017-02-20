@@ -1,4 +1,4 @@
-import fetch from 'node-fetch';
+const fetch = require('node-fetch');
 
 function buildAuthorizationHeader({ id, key }) {
   const auth = `${id}:${key}`;
@@ -19,19 +19,17 @@ function withDeveloperApplication(config, body) {
   );
 }
 
-export async function GET(config, path) {
+async function GET(config, path) {
   const response = await fetch(`https://gwapi.demo.securenet.com/api/${path}`, {
     headers: {
       Authorization: buildAuthorizationHeader(config.credentials)
     }
   });
 
-  const json = await response.json()
-
-  return json
+  return await response.json();
 }
 
-export async function PUT(config, path, body) {
+async function PUT(config, path, body) {
   const response = await fetch(`https://gwapi.demo.securenet.com/api/${path}`, {
     method: 'PUT',
     body: JSON.stringify(withDeveloperApplication(config, body)),
@@ -41,13 +39,11 @@ export async function PUT(config, path, body) {
     }
   });
 
-  const json = await response.json()
-
-  return json
+  return await response.json();
 }
 
 
-export async function POST(config, path, body) {
+async function POST(config, path, body) {
   const response = await fetch(`https://gwapi.demo.securenet.com/api/${path}`, {
     method: 'POST',
     body: JSON.stringify(withDeveloperApplication(config, body)),
@@ -57,7 +53,31 @@ export async function POST(config, path, body) {
     }
   });
 
-  const json = await response.json()
-
-  return json
+  return await response.json();
 }
+
+async function DELETE(config, path) {
+  const response = await fetch(`https://gwapi.demo.securenet.com/api/${path}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: buildAuthorizationHeader(config.credentials)
+    }
+  });
+
+  return await response.json();
+}
+
+function getObjectFromResponse(key, response) {
+  if (!response.success) throw new Error(`(${response.result}) ${response.message}`);
+
+  return response[key];
+}
+
+module.exports = {
+  GET,
+  POST,
+  PUT,
+  DELETE,
+  getObjectFromResponse
+};
