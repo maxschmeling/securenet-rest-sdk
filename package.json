@@ -1,15 +1,11 @@
 {
   "name": "securenet-rest-sdk",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "A modern JavaScript client for the SecureNet REST API.",
   "main": "lib/index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/maxschmeling/securenet-rest-sdk.git"
-  },
-  "scripts": {
-    "compile": "babel --presets latest -d lib/ src/",
-    "prepublish": "npm run compile"
   },
   "keywords": [
     "javascript",
