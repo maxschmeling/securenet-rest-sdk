@@ -1,4 +1,4 @@
-const { POST, getObjectFromResponse } = require('../../util');
+const { POST, getObjectFromResponse } = require('../util');
 
 module.exports = async function capture(config, amount, transactionId) {
   const body = {
