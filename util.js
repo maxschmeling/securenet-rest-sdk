@@ -19,8 +19,14 @@ function withDeveloperApplication(config, body) {
   );
 }
 
+function apiBaseUrl(config) {
+  return config.mode === 'live'
+    ? 'https://gwapi.securenet.com/api'
+    : 'https://gwapi.demo.securenet.com/api';
+}
+
 async function GET(config, path) {
-  const response = await fetch(`https://gwapi.demo.securenet.com/api/${path}`, {
+  const response = await fetch(`${apiBaseUrl(config)}/${path}`, {
     headers: {
       Authorization: buildAuthorizationHeader(config.credentials)
     }
@@ -30,7 +36,7 @@ async function GET(config, path) {
 }
 
 async function PUT(config, path, body) {
-  const response = await fetch(`https://gwapi.demo.securenet.com/api/${path}`, {
+  const response = await fetch(`${apiBaseUrl(config)}/${path}`, {
     method: 'PUT',
     body: JSON.stringify(withDeveloperApplication(config, body)),
     headers: {
@@ -42,9 +48,8 @@ async function PUT(config, path, body) {
   return await response.json();
 }
 
-
 async function POST(config, path, body) {
-  const response = await fetch(`https://gwapi.demo.securenet.com/api/${path}`, {
+  const response = await fetch(`${apiBaseUrl(config)}/${path}`, {
     method: 'POST',
     body: JSON.stringify(withDeveloperApplication(config, body)),
     headers: {
@@ -57,7 +62,7 @@ async function POST(config, path, body) {
 }
 
 async function DELETE(config, path) {
-  const response = await fetch(`https://gwapi.demo.securenet.com/api/${path}`, {
+  const response = await fetch(`${apiBaseUrl(config)}/${path}`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
@@ -69,7 +74,8 @@ async function DELETE(config, path) {
 }
 
 function getObjectFromResponse(key, response) {
-  if (!response.success) throw new Error(`(${response.result}) ${response.message}`);
+  if (!response.success)
+    throw new Error(`(${response.result}) ${response.message}`);
 
   return response[key];
 }
